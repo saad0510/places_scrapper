@@ -53,6 +53,13 @@ class _MapScreenState extends State<MapScreen> {
                 for (final cell in b.cells) cell.polygon,
             ],
           ),
+          CircleLayer(
+            key: Key('places'),
+            circles: [
+              for (final b in boundaries)
+                for (final cell in b.cells) ...cell.places,
+            ],
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
@@ -75,6 +82,12 @@ class _MapScreenState extends State<MapScreen> {
                     onPressed: createHexagonalCells,
                     icon: Icon(Icons.hexagon),
                     color: Colors.blue,
+                  ),
+                  IconButton(
+                    tooltip: 'Scrap Places',
+                    onPressed: scrapPlaces,
+                    icon: Icon(Icons.search),
+                    color: Colors.orange,
                   ),
                   IconButton(
                     tooltip: 'Undo',
@@ -109,8 +122,26 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
+  void scrapPlaces() async {
+    for (final (i, boundary) in boundaries.indexed) {
+      for (final (j, cell) in boundary.cells.indexed) {
+        if (cell.places.isNotEmpty) continue;
+        boundaries[i].cells[j] = await cell.scrapPlaces();
+        setState(() {});
+      }
+    }
+  }
+
   void undo() {
     bool exit = false;
+    for (final (i, boundary) in boundaries.indexed) {
+      for (final (j, cell) in boundary.cells.indexed) {
+        boundaries[i].cells[j] = cell.clean();
+        if (cell.places.isEmpty) continue;
+        exit = true;
+      }
+    }
+    if (exit) return;
     for (final boundary in boundaries) {
       if (boundary.cells.isEmpty) continue;
       boundary.cells.clear();

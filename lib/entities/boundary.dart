@@ -67,7 +67,7 @@ class Boundary {
     );
   }
 
-  static Polygon<Object> polygonCreationCallback(
+  static Polygon polygonCreationCallback(
     List<LatLng> outerRing,
     List<List<LatLng>>? holesList,
     Map<String, dynamic> props,
@@ -97,7 +97,6 @@ class Boundary {
 }
 
 Color _getPolygonColor(int seed) {
-  if (seed == 7) return Colors.red;
   final index = seed % Colors.primaries.length;
   return Colors.primaries[index];
 }

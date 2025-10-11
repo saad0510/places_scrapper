@@ -55,26 +55,36 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ],
       ),
-      floatingActionButton: Row(
-        children: [
-          SizedBox(width: 20),
-          if (boundaries.isNotEmpty)
-            IconButton(
-              onPressed: () => setState(() => boundaries = []),
-              icon: Icon(Icons.delete),
-              color: Colors.red,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+      floatingActionButton: boundaries.isEmpty
+          ? null
+          : Card(
+              color: Colors.black45,
+              margin: EdgeInsets.zero,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    tooltip: 'Simplify Polygons',
+                    onPressed: simplify,
+                    icon: Icon(Icons.line_axis),
+                    color: Colors.blue,
+                  ),
+                  IconButton(
+                    tooltip: 'Create Cells',
+                    onPressed: createHexagonalCells,
+                    icon: Icon(Icons.hexagon),
+                    color: Colors.blue,
+                  ),
+                  IconButton(
+                    tooltip: 'Reset',
+                    onPressed: () => setState(() => boundaries = []),
+                    icon: Icon(Icons.delete),
+                    color: Colors.red,
+                  ),
+                ],
+              ),
             ),
-          Spacer(),
-          if (boundaries.isNotEmpty)
-            FloatingActionButton.extended(
-              onPressed: createHexagonalCells,
-              label: Text('Create Cells'),
-            ),
-          SizedBox(width: 20),
-          if (boundaries.isNotEmpty)
-            FloatingActionButton.extended(onPressed: simplify, label: Text('Simplify')),
-        ],
-      ),
     );
   }
 
@@ -93,6 +103,7 @@ class _MapScreenState extends State<MapScreen> {
 
   void createHexagonalCells() async {
     for (final (i, boundary) in boundaries.indexed) {
+      if (boundary.cells.isNotEmpty) continue;
       boundaries[i] = await boundary.fillWithCells();
       setState(() {});
     }

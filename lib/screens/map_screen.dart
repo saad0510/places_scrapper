@@ -68,7 +68,7 @@ class _MapScreenState extends State<MapScreen> {
                     tooltip: 'Simplify Polygons',
                     onPressed: simplify,
                     icon: Icon(Icons.line_axis),
-                    color: Colors.blue,
+                    color: Colors.teal,
                   ),
                   IconButton(
                     tooltip: 'Create Cells',
@@ -77,9 +77,9 @@ class _MapScreenState extends State<MapScreen> {
                     color: Colors.blue,
                   ),
                   IconButton(
-                    tooltip: 'Reset',
-                    onPressed: () => setState(() => boundaries = []),
-                    icon: Icon(Icons.delete),
+                    tooltip: 'Undo',
+                    onPressed: () => setState(undo),
+                    icon: Icon(Icons.undo),
                     color: Colors.red,
                   ),
                 ],
@@ -107,5 +107,22 @@ class _MapScreenState extends State<MapScreen> {
       boundaries[i] = await boundary.fillWithCells();
       setState(() {});
     }
+  }
+
+  void undo() {
+    bool exit = false;
+    for (final boundary in boundaries) {
+      if (boundary.cells.isEmpty) continue;
+      boundary.cells.clear();
+      exit = true;
+    }
+    if (exit) return;
+    for (final (i, boundary) in boundaries.indexed) {
+      if (!boundary.isSimple) continue;
+      boundaries[i] = boundary.copyWithSimplified(null);
+      exit = true;
+    }
+    if (exit) return;
+    boundaries.clear();
   }
 }

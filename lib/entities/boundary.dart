@@ -55,6 +55,10 @@ class Boundary {
     }
   }
 
+  Boundary copyWithSimplified(Polygon? simplified) {
+    return Boundary(polygon: polygon, simplified: simplified, cells: cells);
+  }
+
   Boundary copyWith({Polygon? polygon, Polygon? simplified, List<Cell>? cells}) {
     return Boundary(
       polygon: polygon ?? this.polygon,

@@ -1,4 +1,6 @@
-part of 'index.dart';
+import 'dart:math' as math;
+
+import 'package:latlong2/latlong.dart' show LatLng;
 
 class BoundingBox {
   final double latMin;

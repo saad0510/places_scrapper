@@ -12,11 +12,11 @@ class SettingsNotifier extends Notifier<Settings> {
   }
 
   void enableRoutesCreation() {
-    state = state.copyWith(shouldCreateRoutes: true);
+    state = state.copyWith(createRoutes: true);
   }
 
   void disableRoutesCreation() {
-    state = state.copyWith(shouldCreateRoutes: false);
+    state = state.copyWith(createRoutes: false);
   }
 
   void setRadius(double radius) {
@@ -28,6 +28,10 @@ class SettingsNotifier extends Notifier<Settings> {
     apiKey = apiKey.trim();
     if (apiKey.isEmpty) return;
     state = state.copyWith(apiKey: apiKey);
+  }
+
+  void toggleShowSettings() {
+    state = state.copyWith(showSettings: !state.showSettings);
   }
 
   // local storage

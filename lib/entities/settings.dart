@@ -4,14 +4,26 @@ class Settings {
   final double radiusInMeters;
   final String apiKey;
   final bool createRoutes;
+  final bool showSettings;
 
-  const Settings({required this.radiusInMeters, required this.apiKey, required this.createRoutes});
+  const Settings({
+    required this.radiusInMeters,
+    required this.apiKey,
+    required this.createRoutes,
+    required this.showSettings,
+  });
 
-  Settings copyWith({double? radiusInMeters, String? apiKey, bool? shouldCreateRoutes}) {
+  Settings copyWith({
+    double? radiusInMeters,
+    String? apiKey,
+    bool? createRoutes,
+    bool? showSettings,
+  }) {
     return Settings(
       radiusInMeters: radiusInMeters ?? this.radiusInMeters,
       apiKey: apiKey ?? this.apiKey,
-      createRoutes: shouldCreateRoutes ?? createRoutes,
+      createRoutes: createRoutes ?? this.createRoutes,
+      showSettings: showSettings ?? this.showSettings,
     );
   }
 
@@ -20,6 +32,7 @@ class Settings {
       'radiusInMeters': radiusInMeters,
       'apiKey': apiKey,
       'createRoutes': createRoutes,
+      'showSettings': showSettings,
     };
   }
 
@@ -29,6 +42,7 @@ class Settings {
       radiusInMeters: map['radiusInMeters'] ?? defaultValues.radiusInMeters,
       apiKey: map['apiKey'] ?? defaultValues.apiKey,
       createRoutes: defaultValues.createRoutes,
+      showSettings: defaultValues.showSettings,
     );
   }
 
@@ -40,5 +54,10 @@ class Settings {
 
 class DefautlSettings extends Settings {
   const DefautlSettings()
-    : super(radiusInMeters: 200, apiKey: '202d8c0a3a9d433b8a22394c4d487990', createRoutes: false);
+    : super(
+        radiusInMeters: 200,
+        apiKey: '202d8c0a3a9d433b8a22394c4d487990',
+        createRoutes: false,
+        showSettings: false,
+      );
 }

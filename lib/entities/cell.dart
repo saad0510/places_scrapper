@@ -27,11 +27,6 @@ class Cell {
     return copyWith(places: newPlaces, polygon: newPolygon);
   }
 
-  Cell clean() {
-    final newPolygon = polygonCreationCallback(polygon, Colors.white);
-    return copyWith(places: const [], polygon: newPolygon);
-  }
-
   Cell copyWith({Polygon? polygon, List<CircleMarker>? places}) {
     return Cell._(polygon: polygon ?? this.polygon, places: places ?? this.places);
   }

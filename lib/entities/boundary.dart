@@ -15,16 +15,6 @@ class Boundary {
 
   bool get isSimple => simplified != null;
 
-  static Future<List<Boundary>> findBoundaries(LatLng latLng) async {
-    final details = await api.reverseGeocode(latLng);
-    final geoJson = await api.fetchGeojson(details['place_id']);
-    final parser = GeoJsonParser(polygonCreationCallback: polygonCreationCallback);
-    parser.parseGeoJson(geoJson);
-
-    final boundaries = parser.polygons.map((p) => Boundary(polygon: p));
-    return boundaries.toList();
-  }
-
   Boundary simplify() {
     if (isSimple) return this;
     final props = polygon.hitValue as Map<String, dynamic>? ?? {};
@@ -35,17 +25,17 @@ class Boundary {
     return copyWith(simplified: simplePolygon);
   }
 
-  Boundary fillWithCells() {
-    final geoJson = api.createHexagons(polygon.points, 200);
+  Boundary unsimplify() {
+    return Boundary(polygon: polygon, simplified: null, cells: cells);
+  }
+
+  Boundary fillWithCells(double radius) {
+    final geoJson = api.createHexagons(polygon.points, radius);
     final parser = GeoJsonParser(polygonCreationCallback: polygonCreationCallback);
     parser.parseGeoJson(geoJson);
 
     final cells = parser.polygons.map((p) => Cell(polygon: p));
     return copyWith(cells: cells.toList());
-  }
-
-  Boundary copyWithSimplified(Polygon? simplified) {
-    return Boundary(polygon: polygon, simplified: simplified, cells: cells);
   }
 
   Boundary copyWith({Polygon? polygon, Polygon? simplified, List<Cell>? cells}) {

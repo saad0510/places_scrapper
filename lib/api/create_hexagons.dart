@@ -1,13 +1,17 @@
 part of 'index.dart';
 
-Future<Map<String, dynamic>> createHexagons(List<LatLng> points) async {
-  const url = 'http://localhost:5000/hexagons';
-  const headers = {'Content-Type': 'application/json', 'Accept': 'application/json'};
-  final body = {'points': points._expandLatLng()};
+Map<String, dynamic> createHexagons(List<LatLng> points, double radiusInMeters) {
+  final coords = points.expandLatLng();
+  final polygon = _closedPolygon(coords);
+  final bbox = Turf.instance.bbox(polygon);
+  final hexagons = Turf.instance.hexGrid(bbox, radiusInMeters);
 
-  final uri = Uri.parse(url);
-  final res = await http.post(uri, headers: headers, body: jsonEncode(body));
-  assert(res.statusCode == 200);
+  return _iterateInFeatures(hexagons, (feature) {
+    final center = Turf.instance.centroid(feature);
+    final inside = Turf.instance.booleanPointInPolygon(center, polygon);
+    if (!inside) return null;
 
-  return Map.from(jsonDecode(res.body) ?? {});
+    final coords = Turf.instance.decodeGeomtryCoords(feature, reverse: true);
+    return Turf.instance.polygon(coords);
+  });
 }

@@ -14,8 +14,8 @@ class Cell {
     return Cell._(polygon: polygonCreationCallback(polygon, Colors.white));
   }
 
-  Future<Cell> scrapPlaces() async {
-    final geoJson = await api.scrapPlaces(polygon.points);
+  Cell scrapPlaces() {
+    final geoJson = api.scrapPlaces(polygon.points);
     final parser = GeoJsonParser();
     parser.parseGeoJson(geoJson);
 

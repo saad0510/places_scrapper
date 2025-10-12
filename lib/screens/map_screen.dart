@@ -122,7 +122,7 @@ class _MapScreenState extends State<MapScreen> {
   void simplify() async {
     for (final (i, boundary) in boundaries.indexed) {
       if (boundary.isSimple) continue;
-      boundaries[i] = await boundary.simplify();
+      boundaries[i] = boundary.simplify();
       setState(() {});
     }
   }
@@ -130,7 +130,7 @@ class _MapScreenState extends State<MapScreen> {
   void createHexagonalCells() async {
     for (final (i, boundary) in boundaries.indexed) {
       if (boundary.cells.isNotEmpty) continue;
-      boundaries[i] = await boundary.fillWithCells();
+      boundaries[i] = boundary.fillWithCells();
       setState(() {});
     }
   }
@@ -139,8 +139,7 @@ class _MapScreenState extends State<MapScreen> {
     for (final (i, boundary) in boundaries.indexed) {
       for (final (j, cell) in boundary.cells.indexed) {
         if (cell.places.isNotEmpty) continue;
-        boundaries[i].cells[j] = await cell.scrapPlaces();
-        if (j % 10 == 0) setState(() {});
+        boundaries[i].cells[j] = cell.scrapPlaces();
       }
       setState(() {});
     }

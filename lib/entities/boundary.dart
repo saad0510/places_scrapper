@@ -16,43 +16,31 @@ class Boundary {
   bool get isSimple => simplified != null;
 
   static Future<List<Boundary>> findBoundaries(LatLng latLng) async {
-    try {
-      final geoJson = await api.getGeoJson(latLng);
-      final parser = GeoJsonParser(polygonCreationCallback: polygonCreationCallback);
-      parser.parseGeoJson(geoJson);
+    final geoJson = await api.getGeoJson(latLng);
+    final parser = GeoJsonParser(polygonCreationCallback: polygonCreationCallback);
+    parser.parseGeoJson(geoJson);
 
-      final boundaries = parser.polygons.map((p) => Boundary(polygon: p));
-      return boundaries.toList();
-    } catch (e) {
-      return const [];
-    }
+    final boundaries = parser.polygons.map((p) => Boundary(polygon: p));
+    return boundaries.toList();
   }
 
-  Future<Boundary> simplify() async {
+  Boundary simplify() {
     if (isSimple) return this;
-    try {
-      final props = polygon.hitValue as Map<String, dynamic>? ?? {};
-      props['old_length'] = polygon.points.length;
+    final props = polygon.hitValue as Map<String, dynamic>? ?? {};
+    props['old_length'] = polygon.points.length;
 
-      final points = await api.simplifyGeoJson(polygon.points);
-      final simplePolygon = polygonCreationCallback(points, polygon.holePointsList, props);
-      return copyWith(simplified: simplePolygon);
-    } catch (e) {
-      return this;
-    }
+    final points = api.simplifyPoints(polygon.points);
+    final simplePolygon = polygonCreationCallback(points, polygon.holePointsList, props);
+    return copyWith(simplified: simplePolygon);
   }
 
-  Future<Boundary> fillWithCells() async {
-    try {
-      final geoJson = await api.createHexagons(polygon.points);
-      final parser = GeoJsonParser(polygonCreationCallback: polygonCreationCallback);
-      parser.parseGeoJson(geoJson);
+  Boundary fillWithCells() {
+    final geoJson = api.createHexagons(polygon.points, 200);
+    final parser = GeoJsonParser(polygonCreationCallback: polygonCreationCallback);
+    parser.parseGeoJson(geoJson);
 
-      final cells = parser.polygons.map((p) => Cell(polygon: p));
-      return copyWith(cells: cells.toList());
-    } catch (e) {
-      return this;
-    }
+    final cells = parser.polygons.map((p) => Cell(polygon: p));
+    return copyWith(cells: cells.toList());
   }
 
   Boundary copyWithSimplified(Polygon? simplified) {

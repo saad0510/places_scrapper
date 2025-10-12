@@ -1,6 +1,8 @@
 import 'dart:js_interop';
-// ignore: deprecated_member_use, avoid_web_libraries_in_flutter
-import 'dart:js_util' as js_util;
+import 'dart:js_interop_unsafe' as jsu;
+
+@JS('turf')
+external JSObject get _turf;
 
 typedef JsMap = Map<String, dynamic>;
 typedef JsCoords = List<List<double>>;
@@ -32,7 +34,7 @@ class Turf {
 
   List bbox(JsMap polygon) {
     final result = _call('bbox', [polygon]);
-    return js_util.dartify(result) as List? ?? [];
+    return result?.dartify() as List? ?? [];
   }
 
   JsMap centroid(JsMap feature) {
@@ -42,7 +44,7 @@ class Turf {
 
   bool booleanPointInPolygon(JsMap point, JsMap polygon) {
     final result = _call('booleanPointInPolygon', [point, polygon]);
-    return result as bool? ?? false;
+    return result?.dartify() as bool? ?? false;
   }
 
   JsMap hexGrid(List bbox, double radiusInMeters) {
@@ -59,8 +61,8 @@ class Turf {
 
   // decoders
 
-  JsMap decodeJsMap(dynamic result) {
-    return Map<String, dynamic>.from(js_util.dartify(result) as Map? ?? {});
+  JsMap decodeJsMap(JSAny? result) {
+    return Map<String, dynamic>.from(result?.dartify() as Map? ?? {});
   }
 
   JsCoords decodeGeomtryCoords(JsMap data, {bool reverse = false}) {
@@ -80,12 +82,13 @@ class Turf {
     ];
   }
 
-  dynamic _call(String method, List<Object?> args) {
-    final turf = js_util.getProperty(js_util.globalThis, 'turf');
+  JSAny? _call(String method, List<Object?> args) {
+    final fn = _turf.getProperty<JSFunction>(method.toJS);
     final jsArgs = [
       for (final arg in args)
         if (arg != null) arg.jsify(),
     ];
-    return js_util.callMethod(turf, method, jsArgs);
+    final result = _turf.callMethodVarArgs<JSAny?>(fn, jsArgs);
+    return result;
   }
 }

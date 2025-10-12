@@ -17,6 +17,17 @@ class SettingsNotifier extends Notifier<Settings> {
   void disableRoutesCreation() {
     state = state.copyWith(shouldCreateRoutes: false);
   }
+
+  void setRadius(double radius) {
+    if (radius <= 0) return;
+    state = state.copyWith(radiusInMeters: radius);
+  }
+
+  void setApiKey(String apiKey) {
+    apiKey = apiKey.trim();
+    if (apiKey.isEmpty) return;
+    state = state.copyWith(apiKey: apiKey);
+  }
 }
 
 final settingsNotifier = NotifierProvider<SettingsNotifier, Settings>(SettingsNotifier.new);

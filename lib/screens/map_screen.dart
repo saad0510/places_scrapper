@@ -5,7 +5,10 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 import '/screens/layers/index.dart';
 import '/screens/widgets/actions_sheet.dart';
-import '../state/actions_notifier.dart';
+import '/screens/widgets/info_sheet.dart';
+import '/screens/widgets/settings_sheet.dart';
+import '/state/actions_notifier.dart';
+import '/state/boundary_notifier.dart';
 
 class MapScreen extends StatelessWidget {
   const MapScreen({super.key});
@@ -37,7 +40,21 @@ class MapScreen extends StatelessWidget {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: ActionsSheet(),
+      floatingActionButton: Consumer(
+        builder: (context, ref, _) {
+          final boundaries = ref.watch(boundaryNotifier);
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 10,
+            children: [
+              if (boundaries.isEmpty) const InfoSheet(),
+              if (boundaries.isNotEmpty) const ActionsSheet(),
+              if (boundaries.isNotEmpty) const SettingsSheet(),
+            ],
+          );
+        },
+      ),
     );
   }
 }

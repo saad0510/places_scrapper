@@ -12,8 +12,9 @@ class BoundaryNotifier extends Notifier<List<Boundary>> {
   List<Boundary> build() => const [];
 
   void findBoundaries(LatLng latLng) async {
-    final details = await api.reverseGeocode(latLng);
-    final geoJson = await api.fetchGeojson(details['place_id']);
+    final apiKey = ref.read(settingsNotifier).apiKey;
+    final details = await api.reverseGeocode(latLng, apiKey);
+    final geoJson = await api.fetchGeojson(details['place_id'], apiKey);
     final parser = GeoJsonParser(polygonCreationCallback: Boundary.polygonCreationCallback);
     parser.parseGeoJson(geoJson);
 

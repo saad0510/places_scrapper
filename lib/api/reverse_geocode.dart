@@ -1,6 +1,6 @@
 part of 'index.dart';
 
-Future<Map<String, dynamic>> reverseGeocode(LatLng latLng) async {
+Future<Map<String, dynamic>> reverseGeocode(LatLng latLng, String apiKey) async {
   const url = 'https://api.geoapify.com/v1/geocode/reverse';
   const headers = {'Accept': 'application/json'};
   final params = {
@@ -10,7 +10,7 @@ Future<Map<String, dynamic>> reverseGeocode(LatLng latLng) async {
     'lang': 'en',
     'limit': '1',
     'format': 'json',
-    'apiKey': '202d8c0a3a9d433b8a22394c4d487990',
+    'apiKey': apiKey,
   };
 
   final uri = Uri.parse(url).replace(queryParameters: params);

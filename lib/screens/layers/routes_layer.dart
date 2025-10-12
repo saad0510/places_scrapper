@@ -8,7 +8,7 @@ class RoutesLayer extends ConsumerWidget {
     final routes = ref.watch(routesProvider);
 
     return PolylineLayer(
-      key: Key('routes'),
+      key: const Key('routes'),
       polylines: [
         for (final route in routes) //
           route.toPolyline(),

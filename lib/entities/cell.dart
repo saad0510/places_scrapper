@@ -38,7 +38,7 @@ class Cell {
       borderColor: color,
       color: color.withValues(alpha: 0.5),
       borderStrokeWidth: 2,
-      labelStyle: TextStyle(color: Colors.white),
+      labelStyle: const TextStyle(color: Colors.white),
       labelPlacement: PolygonLabelPlacement.polylabel,
       hitValue: polygon.hitValue,
     );

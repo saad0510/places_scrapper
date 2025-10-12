@@ -8,12 +8,12 @@ class InfoSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseCard(
-      padding: EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       children: [
         TextButton.icon(
           onPressed: null,
-          icon: Icon(Icons.info_outline, color: Colors.white),
-          label: Text('Long press to add boundaries', style: TextStyle(color: Colors.white)),
+          icon: const Icon(Icons.info_outline, color: Colors.white),
+          label: const Text('Long press to add boundaries', style: TextStyle(color: Colors.white)),
         ),
       ],
     );

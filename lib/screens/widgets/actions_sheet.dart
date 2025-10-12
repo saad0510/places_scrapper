@@ -10,7 +10,7 @@ class ActionsSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseCard(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       children: [
         for (final action in AppActions.values)
           if (action != AppActions.findBoundaries)

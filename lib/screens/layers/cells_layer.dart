@@ -8,7 +8,7 @@ class CellsLayer extends ConsumerWidget {
     final boundaries = ref.watch(boundaryNotifier);
 
     return PolygonLayer(
-      key: Key('cells'),
+      key: const Key('cells'),
       polygons: [
         for (final boundary in boundaries)
           for (final cell in boundary.cells) //

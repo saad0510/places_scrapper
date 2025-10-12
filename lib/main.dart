@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/screens/map_screen.dart';
 
 void main() {
-  runApp(ProviderScope(child: const MainApp()));
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -16,7 +16,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: Colors.teal,
       theme: ThemeData.dark(),
-      home: MapScreen(),
+      home: const MapScreen(),
     );
   }
 }

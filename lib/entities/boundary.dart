@@ -76,7 +76,7 @@ class Boundary {
       color: color.withValues(alpha: 0.5),
       borderStrokeWidth: 2,
       label: label,
-      labelStyle: TextStyle(color: Colors.white),
+      labelStyle: const TextStyle(color: Colors.white),
       labelPlacement: PolygonLabelPlacement.polylabel,
       hitValue: props,
     );

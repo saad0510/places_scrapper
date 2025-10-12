@@ -14,10 +14,13 @@ class SettingsSheet extends ConsumerWidget {
     return SizedBox(
       width: 300,
       child: BaseCard(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         children: [
           TextFormField(
-            decoration: InputDecoration(labelText: 'Radius (meters)', border: InputBorder.none),
+            decoration: const InputDecoration(
+              labelText: 'Radius (meters)',
+              border: InputBorder.none,
+            ),
             initialValue: settings.radiusInMeters.toString(),
             onChanged: (x) {
               final value = double.tryParse(x);
@@ -26,7 +29,10 @@ class SettingsSheet extends ConsumerWidget {
             },
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Geoapify.com Key', border: InputBorder.none),
+            decoration: const InputDecoration(
+              labelText: 'Geoapify.com Key',
+              border: InputBorder.none,
+            ),
             initialValue: settings.apiKey,
             onChanged: (x) {
               ref.read(settingsNotifier.notifier).setApiKey(x);

@@ -8,7 +8,7 @@ class PlacesLayer extends ConsumerWidget {
     final boundaries = ref.watch(boundaryNotifier);
 
     return CircleLayer(
-      key: Key('places'),
+      key: const Key('places'),
       circles: [
         for (final boundary in boundaries)
           for (final cell in boundary.cells) //

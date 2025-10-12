@@ -8,7 +8,7 @@ class BoundaryLayer extends ConsumerWidget {
     final boundaries = ref.watch(boundaryNotifier);
 
     return PolygonLayer(
-      key: Key('boundaries'),
+      key: const Key('boundaries'),
       polygons: [
         for (final b in boundaries) //
           b.isSimple ? b.simplified! : b.polygon,

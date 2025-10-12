@@ -3,6 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart' show LatLng;
 
 import '/entities/boundary.dart';
+import '/routes/index.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -13,6 +14,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   List<Boundary> boundaries = [];
+  List<Polyline> polylines = [];
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,7 @@ class _MapScreenState extends State<MapScreen> {
                 for (final cell in b.cells) ...cell.places,
             ],
           ),
+          PolylineLayer(key: Key('routes'), polylines: polylines),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
@@ -87,6 +90,12 @@ class _MapScreenState extends State<MapScreen> {
                     tooltip: 'Scrap Places',
                     onPressed: scrapPlaces,
                     icon: Icon(Icons.search),
+                    color: Colors.orange,
+                  ),
+                  IconButton(
+                    tooltip: 'Create Routes',
+                    onPressed: onCreateRoutes,
+                    icon: Icon(Icons.pedal_bike_sharp),
                     color: Colors.orange,
                   ),
                   IconButton(
@@ -127,13 +136,31 @@ class _MapScreenState extends State<MapScreen> {
       for (final (j, cell) in boundary.cells.indexed) {
         if (cell.places.isNotEmpty) continue;
         boundaries[i].cells[j] = await cell.scrapPlaces();
-        setState(() {});
+        if (j % 10 == 0) setState(() {});
       }
+      setState(() {});
     }
+  }
+
+  void onCreateRoutes() async {
+    final points = [
+      for (final b in boundaries)
+        for (final cell in b.cells)
+          for (final p in cell.places) p.point,
+    ];
+
+    final routes = createRoutes(points, 200);
+    polylines = routes.map((r) => r.toPolyline()).toList();
+    setState(() {});
   }
 
   void undo() {
     bool exit = false;
+    if (polylines.isNotEmpty) {
+      polylines.clear();
+      exit = true;
+    }
+    if (exit) return;
     for (final (i, boundary) in boundaries.indexed) {
       for (final (j, cell) in boundary.cells.indexed) {
         boundaries[i].cells[j] = cell.clean();

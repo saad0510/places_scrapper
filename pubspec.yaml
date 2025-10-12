@@ -13,6 +13,7 @@ dependencies:
   flutter_map_geojson: ^1.0.8
   http: ^1.5.0
   latlong2: any
+  nanoid: ^1.0.0
 
 dev_dependencies:
   flutter_test:

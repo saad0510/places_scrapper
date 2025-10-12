@@ -1,14 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/entities/settings.dart';
 
 class SettingsNotifier extends Notifier<Settings> {
   @override
-  Settings build() => Settings(
-    radiusInMeters: 200,
-    apiKey: '202d8c0a3a9d433b8a22394c4d487990',
-    createRoutes: false,
-  );
+  Settings build() {
+    _load();
+    listenSelf((_, x) => _save(x));
+    return const DefautlSettings();
+  }
 
   void enableRoutesCreation() {
     state = state.copyWith(shouldCreateRoutes: true);
@@ -27,6 +28,21 @@ class SettingsNotifier extends Notifier<Settings> {
     apiKey = apiKey.trim();
     if (apiKey.isEmpty) return;
     state = state.copyWith(apiKey: apiKey);
+  }
+
+  // local storage
+
+  void _load() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('settings');
+    if (data == null) return;
+    state = Settings.fromJson(data);
+  }
+
+  void _save(Settings x) async {
+    if (x is DefautlSettings) return;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('settings', x.toJson());
   }
 }
 

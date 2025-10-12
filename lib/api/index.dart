@@ -10,6 +10,7 @@ import '/utils/turf.dart';
 
 part 'common.dart';
 part 'create_hexagons.dart';
-part 'get_geo_json.dart';
+part 'fetch_geojson.dart';
+part 'reverse_geocode.dart';
 part 'scrap_places.dart';
 part 'simplify_points.dart';

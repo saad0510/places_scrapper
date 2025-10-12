@@ -36,6 +36,13 @@ class _MapScreenState extends State<MapScreen> {
                 .replaceFirst('{map_id}', 'dark-matter-dark-grey'),
           ),
           PolygonLayer(
+            key: Key('cells'),
+            polygons: [
+              for (final b in boundaries)
+                for (final cell in b.cells) cell.polygon,
+            ],
+          ),
+          PolygonLayer(
             key: Key('boundaries'),
             polygons: [
               for (final b in boundaries)
@@ -47,13 +54,6 @@ class _MapScreenState extends State<MapScreen> {
             polygons: [
               for (final b in boundaries)
                 if (b.isSimple) b.simplified!,
-            ],
-          ),
-          PolygonLayer(
-            key: Key('cells'),
-            polygons: [
-              for (final b in boundaries)
-                for (final cell in b.cells) cell.polygon,
             ],
           ),
           CircleLayer(

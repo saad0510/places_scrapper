@@ -16,7 +16,8 @@ class Boundary {
   bool get isSimple => simplified != null;
 
   static Future<List<Boundary>> findBoundaries(LatLng latLng) async {
-    final geoJson = await api.getGeoJson(latLng);
+    final details = await api.reverseGeocode(latLng);
+    final geoJson = await api.fetchGeojson(details['place_id']);
     final parser = GeoJsonParser(polygonCreationCallback: polygonCreationCallback);
     parser.parseGeoJson(geoJson);
 

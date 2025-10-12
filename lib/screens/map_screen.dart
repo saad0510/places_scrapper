@@ -5,7 +5,6 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 import '/screens/layers/index.dart';
 import '/screens/widgets/actions_sheet.dart';
-import '/screens/widgets/credits_sheet.dart';
 import '/screens/widgets/info_sheet.dart';
 import '/screens/widgets/settings_sheet.dart';
 import '/state/actions_notifier.dart';
@@ -41,21 +40,30 @@ class MapScreen extends StatelessWidget {
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      floatingActionButton: Consumer(
-        builder: (context, ref, _) {
-          final boundaries = ref.watch(boundaryNotifier);
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 10,
-            children: [
-              if (boundaries.isEmpty) const InfoSheet(),
-              if (boundaries.isNotEmpty) const ActionsSheet(),
-              if (boundaries.isNotEmpty) const SettingsSheet(),
-              const CreditsSheet(),
-            ],
-          );
-        },
+      floatingActionButton: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Consumer(
+            builder: (context, ref, _) {
+              final boundaries = ref.watch(boundaryNotifier);
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 10,
+                children: [
+                  if (boundaries.isEmpty) const InfoSheet(),
+                  if (boundaries.isNotEmpty) const ActionsSheet(),
+                  if (boundaries.isNotEmpty) const SettingsSheet(),
+                ],
+              );
+            },
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Text('saadbinkhalid.dev.com'),
+          ),
+        ],
       ),
     );
   }

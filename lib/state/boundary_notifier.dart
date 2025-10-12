@@ -27,7 +27,7 @@ class BoundaryNotifier extends Notifier<List<Boundary>> {
         if (boundary.isSimple) //
           boundary
         else
-          boundary.simplify(),
+          boundary.simplify().refresh(),
     ];
   }
 
@@ -35,7 +35,7 @@ class BoundaryNotifier extends Notifier<List<Boundary>> {
     state = [
       for (final boundary in state)
         if (boundary.isSimple) //
-          boundary.unsimplify()
+          boundary.unsimplify().refresh()
         else
           boundary,
     ];
@@ -46,7 +46,7 @@ class BoundaryNotifier extends Notifier<List<Boundary>> {
     state = [
       for (final boundary in state)
         if (boundary.cells.isEmpty) //
-          boundary.fillWithCells(radius)
+          boundary.fillWithCells(radius).refresh()
         else
           boundary,
     ];
@@ -58,34 +58,38 @@ class BoundaryNotifier extends Notifier<List<Boundary>> {
         if (boundary.cells.isEmpty) //
           boundary
         else
-          boundary.copyWith(cells: const []),
+          boundary.copyWith(cells: const []).refresh(),
     ];
   }
 
   void scrapPlaces() {
     state = [
       for (final boundary in state)
-        boundary.copyWith(
-          cells: [
-            for (final cell in boundary.cells)
-              if (cell.places.isEmpty) //
-                cell.scrapPlaces()
-              else
-                cell,
-          ],
-        ),
+        boundary
+            .copyWith(
+              cells: [
+                for (final cell in boundary.cells)
+                  if (cell.places.isEmpty) //
+                    cell.scrapPlaces()
+                  else
+                    cell,
+              ],
+            )
+            .refresh(),
     ];
   }
 
   void removeAllPlaces() {
     state = [
       for (final boundary in state)
-        boundary.copyWith(
-          cells: [
-            for (final cell in boundary.cells) //
-              Cell(polygon: cell.polygon),
-          ],
-        ),
+        boundary
+            .copyWith(
+              cells: [
+                for (final cell in boundary.cells) //
+                  Cell(polygon: cell.polygon),
+              ],
+            )
+            .refresh(),
     ];
   }
 

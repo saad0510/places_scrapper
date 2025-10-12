@@ -13,6 +13,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Places Scrapper',
       debugShowCheckedModeBanner: false,
       color: Colors.teal,
       theme: ThemeData.dark(),

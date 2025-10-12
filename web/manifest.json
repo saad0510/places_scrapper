@@ -1,6 +1,6 @@
 {
-    "name": "noknokai",
-    "short_name": "noknokai",
+    "name": "Places Scrapper",
+    "short_name": "Scrapper",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

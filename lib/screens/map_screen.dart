@@ -5,6 +5,7 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 import '/screens/layers/index.dart';
 import '/screens/widgets/actions_sheet.dart';
+import '/screens/widgets/credits_sheet.dart';
 import '/screens/widgets/info_sheet.dart';
 import '/screens/widgets/settings_sheet.dart';
 import '/state/actions_notifier.dart';
@@ -51,6 +52,7 @@ class MapScreen extends StatelessWidget {
               if (boundaries.isEmpty) const InfoSheet(),
               if (boundaries.isNotEmpty) const ActionsSheet(),
               if (boundaries.isNotEmpty) const SettingsSheet(),
+              const CreditsSheet(),
             ],
           );
         },

@@ -90,11 +90,12 @@ Color _getPolygonColor(int seed) {
 
 String _getPolygonLabel(List<LatLng> outerRing, Map props, Boundary? prev) {
   final name = props['name'] ?? props['city'] ?? props['formatted'];
-  if (prev == null) {
-    return name.toString();
-  }
-
   String label = name.toString();
+
+  if (prev == null) {
+    label += '\n${outerRing.length} Points';
+    return label.toString();
+  }
 
   if (prev.isSimple) {
     label += '\n${prev.simplified?.points.length} (${prev.polygon.points.length}) Points';

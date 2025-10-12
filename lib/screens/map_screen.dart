@@ -21,7 +21,7 @@ class MapScreen extends StatelessWidget {
     return Scaffold(
       body: FlutterMap(
         options: MapOptions(
-          initialCenter: const LatLng(24.860, 66.990),
+          initialCenter: const LatLng(52.489, -1.898),
           initialZoom: 11,
           onLongPress: (_, x) {
             final actions = ProviderScope.containerOf(context).read(actionsNotifier.notifier);
@@ -65,7 +65,7 @@ class MapScreen extends StatelessWidget {
             },
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: EdgeInsets.symmetric(horizontal: 30),
             child: Text('saadbinkhalid.dev.com'),
           ),
         ],

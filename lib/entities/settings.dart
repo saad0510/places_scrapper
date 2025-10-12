@@ -55,7 +55,7 @@ class Settings {
 class DefautlSettings extends Settings {
   const DefautlSettings()
     : super(
-        radiusInMeters: 200,
+        radiusInMeters: 500,
         apiKey: '202d8c0a3a9d433b8a22394c4d487990',
         createRoutes: false,
         showSettings: false,

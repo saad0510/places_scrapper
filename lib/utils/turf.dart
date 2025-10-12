@@ -25,7 +25,7 @@ class Turf {
   }
 
   JsMap simplify(JsMap polygon) {
-    final options = {'tolerance': 0.001};
+    final options = {'tolerance': 0.002};
     final result = _call('simplify', [polygon, options]);
     return decodeJsMap(result);
   }

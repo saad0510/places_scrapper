@@ -15,7 +15,7 @@ class SettingsIcon extends ConsumerWidget {
       children: [
         IconButton(
           onPressed: () => ref.read(settingsNotifier.notifier).toggleShowSettings(),
-          icon: showSettings ? const Icon(Icons.close) : const Icon(Icons.settings),
+          icon: showSettings ? const Icon(Icons.close) : const Icon(Icons.edit),
           color: Colors.white,
         ),
       ],

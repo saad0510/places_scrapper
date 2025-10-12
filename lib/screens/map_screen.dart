@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart' show LatLng;
 
 import '/entities/boundary.dart';
 import '/routes/index.dart';
+import '/screens/my_button.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -73,37 +74,40 @@ class _MapScreenState extends State<MapScreen> {
               margin: EdgeInsets.zero,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
-                    tooltip: 'Simplify Polygons',
+                  SizedBox(height: 10),
+                  MyButton(
                     onPressed: simplify,
-                    icon: Icon(Icons.line_axis),
+                    label: 'Simplify Polygons',
                     color: Colors.teal,
+                    icon: Icons.line_axis,
                   ),
-                  IconButton(
-                    tooltip: 'Create Cells',
+                  MyButton(
                     onPressed: createHexagonalCells,
-                    icon: Icon(Icons.hexagon),
+                    label: 'Create Cells',
                     color: Colors.blue,
+                    icon: Icons.hexagon,
                   ),
-                  IconButton(
-                    tooltip: 'Scrap Places',
+                  MyButton(
                     onPressed: scrapPlaces,
-                    icon: Icon(Icons.search),
+                    label: 'Scrap Places',
                     color: Colors.orange,
+                    icon: Icons.search,
                   ),
-                  IconButton(
-                    tooltip: 'Create Routes',
+                  MyButton(
                     onPressed: onCreateRoutes,
-                    icon: Icon(Icons.pedal_bike_sharp),
+                    label: 'Create Routes',
                     color: Colors.orange,
+                    icon: Icons.pedal_bike_sharp,
                   ),
-                  IconButton(
-                    tooltip: 'Undo',
+                  MyButton(
                     onPressed: () => setState(undo),
-                    icon: Icon(Icons.undo),
+                    label: 'Undo',
                     color: Colors.red,
+                    icon: Icons.undo,
                   ),
+                  SizedBox(height: 10),
                 ],
               ),
             ),

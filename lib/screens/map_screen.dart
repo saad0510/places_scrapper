@@ -64,10 +64,12 @@ class MapScreen extends StatelessWidget {
               );
             },
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Text('saadbinkhalid.dev.com'),
-          ),
+          const SizedBox.shrink(),
+          if (false)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Text('saadbinkhalid.dev.com'),
+            ),
         ],
       ),
     );

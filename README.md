@@ -2,7 +2,7 @@
 
 # Places Scrapper
 
-[![Star this repo](https://img.shields.io/badge/Star-⭐_this_repo-FFEC86?style=for-the-badge&logo=github&logoColor=white)](https://github.com/saad0510/emirates-app)
+[![Star this repo](https://img.shields.io/badge/Star-⭐_this_repo-FFEC86?style=for-the-badge&logo=github&logoColor=white)](https://github.com/saad0510/places_scrapper)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-1077C7?style=for-the-badge&logo=rocket&logoColor=white)](https://saad0510.github.io/places_scrapper)
 [![Watch Demo](https://img.shields.io/badge/Watch-Demo-CD2F30?style=for-the-badge&logo=youtube&logoColor=white)](https://drive.google.com/file/d/1WU50BeynBNDoaCU2IGifww770nGkzUjC/view?usp=drive_link)
 

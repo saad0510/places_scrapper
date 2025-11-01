@@ -57,3 +57,6 @@ The Cloud Task queue also manages the throughput of the system in order to stay 
 ### 5.   Routing Algorithm
 
 After ingestion, new businesses are clustered together into routes to keep visit stops geographically close for the sales person. Since the Directions API supports a maximum of 25 stops per request, I had to design my own Breadth-First-Search algorithm to limit group size and search radius. The algorithm runs only on fresh points to avoid recomputing everything.
+
+## Developer
+saadbinkhalid.dev@gmail.com

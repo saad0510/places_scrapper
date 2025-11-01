@@ -2,6 +2,10 @@
 
 # Places Scrapper
 
+[![Star this repo](https://img.shields.io/badge/Star-⭐_this_repo-FFEC86?style=for-the-badge&logo=github&logoColor=white)](https://github.com/saad0510/emirates-app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-1077C7?style=for-the-badge&logo=rocket&logoColor=white)](https://saad0510.github.io/places_scrapper)
+[![Watch Demo](https://img.shields.io/badge/Watch-Demo-CD2F30?style=for-the-badge&logo=youtube&logoColor=white)](https://drive.google.com/file/d/1WU50BeynBNDoaCU2IGifww770nGkzUjC/view?usp=drive_link)
+
 A website to showcase my solution strategy used in [NokNokAI](https://noknokai.com) to escape the limitations of Google Places API and scrape businesses from a large geo-region, like a city.
 
 - 🗾 Create boundaries of different region.
@@ -13,12 +17,6 @@ A website to showcase my solution strategy used in [NokNokAI](https://noknokai.c
 ## Background
 
 It is a limited version of the original platform and includes random data for illustration purposes only.
-
-## Links
-
-⚡ Website : [Click here](https://saad0510.github.io/places_scrapper) <br>
-💻 Platform : [Click here](https://noknokai.com/) <br>
-📽️ Video : [Click here](https://drive.google.com/file/d/1WU50BeynBNDoaCU2IGifww770nGkzUjC/view?usp=drive_link) <br>
 
 ## [NokNokAI](https://noknokai.com)
 

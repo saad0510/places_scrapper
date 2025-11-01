@@ -2,13 +2,17 @@
 
 # Places Scrapper
 
-A flutter website about to showcase my solution strategy used in [NokNokAI](https://noknokai.com). It is a limited version of the original platform and includes random data for illustration purposes only.
+A website to showcase my solution strategy used in [NokNokAI](https://noknokai.com) to escape the limitations of Google Places API and scrape businesses from a large geo-region, like a city.
 
 - 🗾 Create boundaries of different region.
 - 🪓 Simplify each region to save space.
 - 💎 Fill regions with a grid of hexagonal cells.
 - 🔍 Search for Google Places in each cell.
 - 🚗 Group nearby places together in a visit route.
+
+## Background
+
+It is a limited version of the original platform and includes random data for illustration purposes only.
 
 ## Links
 
